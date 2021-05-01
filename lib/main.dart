@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:mysql1/mysql1.dart';
 
-void main() {
+Future main() async {
+  final conn = await MySqlConnection.connect(ConnectionSettings(
+      host: '35.188.216.13',
+      port: 3306,
+      user: 'tearrific',
+      password: 'opaHFjs07eB7j8dm',
+      db: 'db_tearrific'));
+
+  var results = await conn.query('select No, Name, Description from Products');
+  for (var row in results) {
+    print('No: ${row[0]}, Name: ${row[1]}, Description: ${row[2]}');
+  }
+
+  await conn.close();
+
   runApp(MyApp());
 }
 
