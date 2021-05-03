@@ -9,9 +9,11 @@ Future main() async {
       password: 'opaHFjs07eB7j8dm',
       db: 'db_tearrific'));
 
-  var results = await conn.query('select No, Name, Description from Products');
+  var results = await conn.query(
+      'select p.No, c.Name, p.Name, p.Currency, p.Buy_Price from Product_Categories c, Products p where p.Product_Category = c.No order by p.No;');
   for (var row in results) {
-    print('No: ${row[0]}, Name: ${row[1]}, Description: ${row[2]}');
+    print(
+        'No: ${row[0]}, Category: ${row[1]}, Product Name: ${row[2]}, Currency: ${row[3]}, Buy Price: ${row[4]}');
   }
 
   await conn.close();
