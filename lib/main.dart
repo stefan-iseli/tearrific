@@ -1,48 +1,52 @@
+// import standard libraries
 import 'package:flutter/material.dart';
 import 'package:mysql1/mysql1.dart';
-//import 'package:mysql1/mysql1.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// import own libraries
 import 'package:tearrific/sql.dart';
+import 'package:tearrific/drawer.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  final _conn = mySQLConnectService.mySQLConnect();
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // connect to MySQL database db_tearrific
+  final Future<MySqlConnection> _conn = mySQLConnectService.mySQLConnect();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tearrific',
+      title: "Tearrific",
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
+        primaryColor: Colors.lightBlue,
+        accentColor: Colors.blueAccent,
+        textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(sql: _conn),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.sql}) : super(key: key);
-  final Future<MySqlConnection> sql;
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  //int _counter = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Soon you will see product information here ...',
-            ),
-          ],
+      home: Scaffold(
+        appBar: AppBar(
+          title: new Text(
+            "Tearrific",
+            style: TextStyle(fontSize: 24, color: Colors.white),
+          ),
+          centerTitle: true,
+        ),
+        drawer: showMenuDrawer(context),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Product Information to come soon',
+              ),
+            ],
+          ),
         ),
       ),
     );
