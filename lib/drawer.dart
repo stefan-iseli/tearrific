@@ -15,6 +15,10 @@ Widget showMenuDrawer(BuildContext context) {
             curve: Curves.bounceInOut,
             decoration: BoxDecoration(
               color: Colors.blue,
+              image: const DecorationImage(
+                image: AssetImage('assets/tearrific.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
             child: Stack(children: <Widget>[
               //            Align(
