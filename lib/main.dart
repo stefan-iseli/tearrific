@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 // import own libraries
 import 'package:tearrific/sql.dart';
 import 'package:tearrific/drawer.dart';
+import 'package:tearrific/product_inventory.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // connect to MySQL database db_tearrific
-  final Future<MySqlConnection> _conn = mySQLConnectService.mySQLConnect();
+  final Future<MySqlConnection> _conn = mySQLServices.mySQLConnect();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,16 +39,7 @@ class _MyAppState extends State<MyApp> {
           centerTitle: true,
         ),
         drawer: showMenuDrawer(context),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Product Information to come soon',
-              ),
-            ],
-          ),
-        ),
+        body: readProductInventory(context, _conn),
       ),
     );
   }

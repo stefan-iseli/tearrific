@@ -5,9 +5,9 @@ import 'package:mysql1/mysql1.dart';
 //import own packages/files
 //
 
-class MySQLConnectService {
+class MySQLServices {
   // Constructor
-  MySQLConnectService();
+  MySQLServices();
 
   // Connect to db_tearrific MySQL Database on Google Cloud
   // ------------------------------------------------------
@@ -22,6 +22,19 @@ class MySQLConnectService {
     mySQLReadProducts(conn);
     mySQLDisconnect(conn);
     return conn;
+  }
+
+  // Read Product Inventory from database
+  // ------------------------------------
+  Future<void> readProductInventory(dynamic conn) async {
+    print('retrieving product inventory from database ');
+    var results = await conn.query(
+        'select p.No, c.Name, p.Name, p.Currency, p.Buy_Price from Product_Categories c, Products p where p.Product_Category = c.No order by p.No;');
+    for (var row in results) {
+      print(
+          'No: ${row[0]}, Category: ${row[1]}, Product Name: ${row[2]}, Currency: ${row[3]}, Buy Price: ${row[4]}');
+    }
+    //return results;
   }
 
   Future<void> mySQLReadProducts(dynamic conn) async {
@@ -41,4 +54,4 @@ class MySQLConnectService {
   }
 }
 
-final MySQLConnectService mySQLConnectService = MySQLConnectService();
+final MySQLServices mySQLServices = MySQLServices();
