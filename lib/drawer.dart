@@ -9,26 +9,22 @@ Widget showMenuDrawer(BuildContext context) {
       padding: EdgeInsets.zero,
       children: <Widget>[
         DrawerHeader(
-            margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-            padding: EdgeInsets.all(20.0),
+            margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+            padding: EdgeInsets.all(10.0),
             duration: Duration(seconds: 2),
             curve: Curves.bounceInOut,
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.white,
               image: const DecorationImage(
-                image: AssetImage('assets/tearrific.jpg'),
-                fit: BoxFit.cover,
+                image: AssetImage('assets/tearrific_small.png'),
+                fit: BoxFit.scaleDown,
               ),
             ),
-            child: Stack(children: <Widget>[
-              //            Align(
-              //              alignment: Alignment.topRight,
-              //              child: IconButton(
-              //                  icon: Icon(Icons.close, size: 30, color: Colors.white),
-              //                  onPressed: () => Navigator.pop(context)),
-              //            ),
-              Align(
-                alignment: Alignment.topCenter,
+            child: Container(
+              width: 50,
+              height: 60,
+              child: Align(
+                alignment: Alignment.centerLeft,
                 child: Text(
                   'Menu',
                   style: TextStyle(
@@ -37,7 +33,7 @@ Widget showMenuDrawer(BuildContext context) {
                   ),
                 ),
               ),
-            ])),
+            )),
         ListTile(
           leading: Icon(Icons.brush),
           title: Text('Products'),
